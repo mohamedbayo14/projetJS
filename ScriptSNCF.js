@@ -4,7 +4,14 @@ var promises = []; // pour le csv
 var tab = []; // tableau de valeurs nombres d'accidents par type d'accident
 var annees = []; // tableau des années
 var tabCourbe = []; // tableau pour les courbes
+var tabHist = []; //tableau pour les histogramme
 var a = 0, b = 0, c = 0, d = 0, e = 0;
+var nb2014 = 0; nb2015 = 0, nb2016 = 0, nb2017 = 0; //Variable contenant les nombre d'accidents
+var tot[]; // Tableau contenant les nombres d'accidents
+
+
+
+
 
 promises.push(d3.csv("https://raw.githubusercontent.com/mohamedbayo14/projetJS/2dc11320b1e9374e4baf5d49cd93edb671103587/incidentsannee1.csv"));
 Promise.all(promises).then(function (values) {
@@ -31,6 +38,54 @@ Promise.all(promises).then(function (values) {
     			e++;
     	}
     }
+
+    //Comptage du nombre total d'accidents chaque année
+    for ( var i = 0; i < values[0].length; i++ ){
+
+      if ( values[0][i].Date == 2014 ){
+        nb2014++;
+      }
+
+      if ( values[0][i].Date == 2015 ){
+        nb2015++;
+      }
+
+      if ( values[0][i].Date == 2016 ){
+        nb2016++;
+      }
+
+      if ( values[0][i].Date == 2017 ){
+        nb2017++;
+      }
+
+    }
+    tot.push(nb2014, nb2015, nb2016, nb2017);
+
+    //Mise en place des bordure
+    var margin = {top: 80, right: 80, bottom: 80, left: 80},
+    width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+    //Définition abscisses et des ordonnees
+
+    var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+    var y0 = d3.scale.linear().domain([300, 1100]).range([height, 0]);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("class", "graph")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
     //console.log(a+","+b+","+c+","+d+","+e);
     tab.push(a, b, c, d, e);
     annees.push(2014, 2015, 2016, 2017, 2018);
