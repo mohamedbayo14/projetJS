@@ -222,13 +222,6 @@ Promise.all(promises).then(function (values) {
             //courbe('Franchissement de signal');
         });
 
-        var leg=svg.selectAll("g.legende").data(tabValues)
-leg.enter()
-    .append("g")
-    .attr("class","legende")
-    .attr("transform",function(d,i){
-        return "translate(450,"+(100+30*i)+")";
-        });
 
     	secteurs.attr('d', function (d, i) {
         	let arc = d3.arc()
@@ -241,7 +234,6 @@ leg.enter()
     	.attr('fill', function (d, i) {
         return couleurs[i];
     })
-
 
 
     // Exit
