@@ -111,19 +111,19 @@ Promise.all(promises).then(function (values) {
 
 	function pieChart(annee){
     	const height = 600;
-		const width = 600;
+		const width = 1000;
 		
 		const inner = 0;
 		const outer = 150;
 
-		var a = 0, b = 0, c = 0, d = 0, e = 0, f = 0, h = 0, i = 0;
+		var a = 0, b = 0, c = 0, d = 0, e = 0, f = 0, h = 0;
 
 		var tabValues = [];
 		var tabTitles = [];
 		var tabCouple = [];
 
 		tabTitles.push('Déraillement sans engagement de la voie principale', 'Franchissement de signal',
-	'Expédition sans ordre', 'Expédition sans ordre', 'Déraillement', "Talonnage d’aiguille ou bivoie",'Autres');
+	'Défaillance voie','Expédition sans ordre', 'Déraillement', "Talonnage d’aiguille ou bivoie",'Autres');
 
 		for(var i = 0; i < values[0].length; i++){
     	//console.log(values[0][i].Type);
@@ -235,6 +235,36 @@ Promise.all(promises).then(function (values) {
         return couleurs[i];
     })
 
+    var leg=svg.selectAll("g").data(tabCouple);
+    leg.enter()	
+    .append("g")
+    .attr("class","legende")
+    .attr("transform",function(d,i){
+        return "translate(450,"+(100+30*i)+")";
+        });
+    var z = 0;
+    for (var j = 0; j < nbData; j++) {
+    	leg.append("rect")
+    .attr("x", 205 + z)
+	.attr('y', 12 + z)
+	.attr("width",15)
+	.attr("height",15)
+	.attr("fill",function (d,i){
+		return couleurs[j];
+	});
+
+	leg.append("text")
+	.attr("x", 225 + z)
+	.attr('y', 22 + z)
+	.attr("fill","black")
+	.style("font-size","12px")
+    .text(function(d,i) {
+        return tabCouple[j].incidents;
+    });
+    z = z + 15;
+    }
+
+	
 
     // Exit
         secteurs.exit().remove();
