@@ -14,6 +14,7 @@ Promise.all(promises).then(function (values) {
    		var margin = { top: 20, right: 20, bottom: 30, left: 50 };
    		var width = svgWidth - margin.left - margin.right;
    		var height = svgHeight - margin.top - margin.bottom;
+
    		var svg = d3.select('svg')
      	.attr("width", svgWidth)
      	.attr("height", svgHeight);
@@ -25,7 +26,7 @@ Promise.all(promises).then(function (values) {
 
    		var x = d3.scaleTime().rangeRound([0, width]);
 		var y = d3.scaleLinear().rangeRound([height, 0]);
-
+		
 		var line = d3.line()
    		.x(function(d) { return x(d.dates)})
    		.y(function(d) { return y(d.values)})
@@ -88,6 +89,7 @@ Promise.all(promises).then(function (values) {
     }
     tab.push(a, b, c, d, e);
     annees.push(2014, 2015, 2016, 2017, 2018);
+    //var parseDate = d3.timeParse("%Y");
     console.log(tab);
 
     for(var i=0; i<5; i++){
@@ -98,6 +100,7 @@ Promise.all(promises).then(function (values) {
     		}
     	);
     }
+
     drawChart(tabCourbe);
     console.log(tabCourbe);
   }
@@ -109,8 +112,8 @@ Promise.all(promises).then(function (values) {
 
 /* Pie chart inspiré du code d'exemple du cours */
 
-	function pieChart(annee){
-    	const height = 600;
+	/*function pieChart(annee){
+    	const height = 400;
 		const width = 1000;
 		
 		const inner = 0;
@@ -155,7 +158,8 @@ Promise.all(promises).then(function (values) {
 		const nbData = tabValues.length;
 
 		/* Couples incidents/nbrOccurences */
-		for(var i=0; i<nbData; i++){
+
+		/*for(var i=0; i<nbData; i++){
     	tabCouple.push(
     		{
     			incidents: tabTitles[i],
@@ -219,7 +223,7 @@ Promise.all(promises).then(function (values) {
         })
         .on('click', function(d, i) {
             
-            //courbe('Franchissement de signal');
+            courbe(tabCouple[i].incidents);
         });
 
 
@@ -237,30 +241,32 @@ Promise.all(promises).then(function (values) {
 
     var leg=svg.selectAll("g").data(tabCouple);
     leg.enter()	
-    .append("g")
-    .attr("class","legende")
-    .attr("transform",function(d,i){
+    	.append("g")
+    	.attr("class","legende")
+    	.attr("transform",function(d,i){
         return "translate(450,"+(100+30*i)+")";
         });
+
+    /* Légende du pie chart *//*
     var z = 0;
     for (var j = 0; j < nbData; j++) {
-    	leg.append("rect")
-    .attr("x", 205 + z)
-	.attr('y', 12 + z)
-	.attr("width",15)
-	.attr("height",15)
-	.attr("fill",function (d,i){
+    leg.append("rect")
+    	.attr("x", 205 + z)
+		.attr('y', 12 + z)
+		.attr("width",15)
+		.attr("height",15)
+		.attr("fill",function (d,i){
 		return couleurs[j];
 	});
 
 	leg.append("text")
-	.attr("x", 225 + z)
-	.attr('y', 22 + z)
-	.attr("fill","black")
-	.style("font-size","12px")
-    .text(function(d,i) {
-        return tabCouple[j].incidents;
-    });
+		.attr("x", 225 + z)
+		.attr('y', 22 + z)
+		.attr("fill","black")
+		.style("font-size","12px")
+    	.text(function(d,i) {
+        	return tabCouple[j].incidents;
+    	});
     z = z + 15;
     }
 
@@ -273,6 +279,6 @@ Promise.all(promises).then(function (values) {
 
 	camembert(tabValues);
     }
-    pieChart(2014);
+    pieChart(2014);*/
 });
 	

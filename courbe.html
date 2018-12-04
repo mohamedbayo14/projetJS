@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>SNCF</title>
+    <link rel="stylesheet" type="text/css" href="sncf.css"> <!-- css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./d3.min.js"></script>
+    <script src="./ScriptSNCF.js"></script> <!-- script javascript -->
+    <script src="./ScriptSNCF.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <div class="container header">
+    	<div class="row">
+    		<div class="col-md-3">
+    			<img src="sncf.jpg"/>
+    		</div>
+
+    		<!-- <div class="col-md-8">
+    			<span>Analyse des incidents</span>
+    		</div> -->
+    	</div>
+    	
+    	
+    </div>
+
+</head>
+<body>
+    <div>
+        <a href="sncf.html" id="button1" class="btn btn-default btn-lg">Vue d'ensemble</a>
+        <a href="courbe.html" id="button2" class="btn btn-default btn-lg">Vue sur les incidents</a>
+    </div>
+
+	<div id="demo"><svg></svg></div>
+    	
+</body>
+<script>
+    /*function myFunction() {
+            document.getElementById("demo").innerHTML = "Hello World";
+        }*/
+    d3.csv("https://raw.githubusercontent.com/mohamedbayo14/projetJS/2dc11320b1e9374e4baf5d49cd93edb671103587/incidentsannee1.csv", 
+  function(data){
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "Hello World";
+        }
+  });
+</script>
+</html>
