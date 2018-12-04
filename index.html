@@ -1,0 +1,145 @@
+<html>
+
+<head></head>
+
+<body>
+
+
+
+<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+
+<!-- <script src="https://d3js.org/d3-selection.v1.js"></script> -->
+
+ 
+
+<script src="d3pie.js"></script>
+
+<script src="d3.min.js"></script>
+<div id="myPie"></div>
+
+<script>
+        var promises = []; // pour le csv
+
+
+    promises.push(d3.csv("https://raw.githubusercontent.com/mohamedbayo14/projetJS/2dc11320b1e9374e4baf5d49cd93edb671103587/incidentsannee1.csv"));
+
+    Promise.all(promises).then(function (values) {
+         const csv = values[0];
+         //console.log(values); 
+         var a =0, b=0,c=0,d=0,e=0,f=0,h=0;
+        var tabTitles = [];
+
+        tabTitles.push('Déraillement sans engagement de la voie principale', 'Franchissement de signal',
+
+    'Défaillance voie','Expédition sans ordre', 'Déraillement', "Talonnage d’aiguille ou bivoie",'Autres');
+
+
+
+for(var i = 0; i < values[0].length; i++){
+        //console.log(values[0][i].Type);
+        
+
+
+
+        var tabCouple = [];
+        if (values[0][i].Date == '2014') {
+            if (values[0][i].Type == 'Déraillement sans engagement de la voie principale') {
+                a++;
+            }
+            else if (values[0][i].Type == 'Franchissement de signal') {
+                b++;
+            }
+            else if (values[0][i].Type == 'Défaillance voie') {
+                c++;
+            }
+            else if (values[0][i].Type == 'Expédition sans ordre') {
+                d++;
+            }
+            else if (values[0][i].Type == 'Déraillement') {
+                e++;
+            }
+            else if (values[0][i].Type == "Talonnage d’aiguille ou bivoie") {
+                f++;
+            }
+            else
+                h++;
+           }
+        }
+        //console.log(a,b,c,d,e,f,h)
+        var tabValues=[];
+        tabValues.push(a, b, c, d, e, f, h); 
+        const nbData = tabValues.length;
+
+        /* Couples incidents/nbrOccurences */
+        for(var i=0; i<nbData; i++){
+        tabCouple.push(
+            {
+                "label": tabTitles[i],
+                "value": tabValues[i],
+
+            }
+        );
+        }
+
+        //console.log(tabCouple)
+
+
+
+
+
+
+        var pie = new d3pie("myPie", {
+
+    header: {
+
+        title: {
+
+            text: "A very simple example pie"
+
+        }
+
+    },
+
+    data: {
+
+        content: tabCouple
+
+     },
+
+ 
+
+    //Here further operations/animations can be added like click event, cut out the clicked pie section.
+
+     callbacks: {
+
+        onMouseoverSegment: function(info) {
+
+            console.log("mouse in", info);
+
+        },
+
+        onMouseoutSegment: function(info) {
+
+            console.log("mouseout:", info);
+
+        }
+
+    }
+
+      
+
+    });
+
+
+
+
+    });
+
+    
+ 
+
+</script>
+
+</body>
+
+</html>
