@@ -15,7 +15,7 @@
 <script src="d3pie.js"></script>
 
 <script src="d3.min.js"></script>
-<div id="myPie"></div>
+<div id="pie"></div>
 
 <script>
         var promises = []; // pour le csv
@@ -88,7 +88,7 @@ for(var i = 0; i < values[0].length; i++){
 
 
 
-        var pie = new d3pie("myPie", {
+        var pie = new d3pie("pie", {
 
     header: {
 
@@ -122,8 +122,15 @@ for(var i = 0; i < values[0].length; i++){
 
             console.log("mouseout:", info);
 
-        }
+        },
+        onClickSegment: function(a) {
+            
+			alert("Segment clicked! See the console for all data passed to the click handler.");
+			
+            console.log(a);
 
+
+        }   
     }
 
       
