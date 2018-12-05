@@ -106,13 +106,9 @@ Promise.all(promises).then(function (values) {
   }
   //courbe('Franchissement de signal');
 
-/*  	function myFunction() {
-    document.getElementById("demo").innerHTML = "Hello World";
-}*/
-
 /* Pie chart inspiré du code d'exemple du cours */
 
-	/*function pieChart(annee){
+	function pieChart(annee){
     	const height = 400;
 		const width = 1000;
 		
@@ -159,16 +155,41 @@ Promise.all(promises).then(function (values) {
 
 		/* Couples incidents/nbrOccurences */
 
-		/*for(var i=0; i<nbData; i++){
+		for(var i=0; i<nbData; i++){
     	tabCouple.push(
     		{
-    			incidents: tabTitles[i],
-    			valeurs: tabValues[i]
+    			"label": tabTitles[i],
+    			"value": tabValues[i]
     		}
     	);
     	}
 
-		let svg = d3.select('body')
+    	var pie = new d3pie("myPie", {
+    header: {
+        title: {
+            text: "A very simple example pie"
+        }
+    },
+    data: {
+        content: tabCouple
+     },
+ 
+    //Here further operations/animations can be added like click event, cut out the clicked pie section.
+     callbacks: {
+        onMouseoverSegment: function(info) {
+            console.log("mouse in", info);
+        },
+        onMouseoutSegment: function(info) {
+            console.log("mouseout:", info);
+        },
+        .on('click', function(d, i) {
+            courbe(tabCouple[i].label);
+        });
+    }
+      
+    });
+
+		/*let svg = d3.select('body')
     		.append('svg')
     		.attr('width', width)
     		.attr('height', height);
@@ -277,8 +298,8 @@ Promise.all(promises).then(function (values) {
 	}
 
 
-	camembert(tabValues);
+	camembert(tabValues);*/
     }
-    pieChart(2014);*/
+    pieChart(2014);
 });
 	

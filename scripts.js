@@ -690,6 +690,9 @@ d3.csv("https://raw.githubusercontent.com/mohamedbayo14/projetJS/2dc11320b1e9374
             .attr("y", function(d) { return y(d.values); })
             .attr("height", function(d) { return height - y(d.values); })
             .on('click', function(d,i){
+              let color = d3.select(this).attr('fill');
+            let svg = d3.select("svg");
+            svg.selectAll("*").remove();
               pieChart(tabHist[i].dates);
             })
             /*.on('mouseover', tip.show)

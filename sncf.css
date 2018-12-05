@@ -1,6 +1,6 @@
 .line-chart
 {
-	border: 1px solid lightgray;
+	border: 2px solid lightgray;
 }
 body {
   font: 10px sans-serif;
@@ -9,16 +9,25 @@ body {
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: #bb2564;
   shape-rendering: crispEdges;
 }
 
+/*.axis {
+	stroke: #bb2564;
+	width: 2px;
+}*/
+
+
+/*.axis:hover {
+	fill: #bb2564;
+}*/
 .bar {
-  fill: orange;
+  fill: #bb2564;
 }
 
 .bar:hover {
-  fill: orangered ;
+  fill: #bb2599 ;
 }
 
 .x.axis path {

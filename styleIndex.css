@@ -2,6 +2,10 @@
     background-color: #bb2564;
     color: #ffffff;
   }
+
+#button:hover{
+  background-color: #bb2599;
+}
   .bg-1 { 
       /*background-color: #bb2564;*/
       background-image: url('sncf1.jpg');
