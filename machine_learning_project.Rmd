@@ -1,0 +1,61 @@
+---
+title: "Machine_learning_project"
+author: "Mohamed BAYO"
+date: "14 décembre 2018"
+output: html_document
+---
+
+
+## 1. Dataset description
+
+```{r}
+data_fifa <- read.csv2("data_fifa.csv", header = T, sep = ";")
+summary(data_fifa)
+```
+```{r}
+dim(data_fifa) #dimensions
+```
+
+## 2. Converting some factors into numerics
+```{r}
+## Converting pace, dribbling, shooting, passing, defending, physicality from factor to numeric
+data_fifa$pace <- as.numeric(as.character(data_fifa$pace)) #converting pace
+data_fifa$dribbling <- as.numeric(as.character(data_fifa$dribbling))
+data_fifa$shooting <- as.numeric(as.character(data_fifa$shooting))
+data_fifa$passing <- as.numeric(as.character(data_fifa$passing))
+data_fifa$defending <- as.numeric(as.character(data_fifa$defending))
+data_fifa$physicality <- as.numeric(as.character(data_fifa$physicality))
+```
+
+## 3. Ranking
+```{r}
+data_fifa[["player_extended_name"]] <- NULL #remove column name
+summary(data_fifa)
+```
+```{r}
+lm.fit=lm(overall~.-position,data=data_fifa)
+summary(lm.fit)
+```
+#### The variables with the lowest p are the most relevant. So in this case the attributs att_workrate et def_workrate are less relevants
+
+## 4. Predicting overalls
+### Linear regression models
+```{r}
+set.seed(1)
+data_fifa[["position"]] <- NULL
+ind=sample(nrow(data_fifa), round(nrow(data_fifa) * 0.5))
+
+training <- data_fifa[ind,] #training data
+testing <- data_fifa[-ind,] #testing data
+
+#Predictions
+lm.fit=lm(overall~.-att_workrate-def_workrate,data=training)
+predictions<-predict(lm.fit,newdata=testing)
+
+#Computing error
+error<-sqrt((sum((testing$overall-predictions)^2))/nrow(testing))
+error
+
+```
+
+
